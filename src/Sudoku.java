@@ -31,12 +31,11 @@ public class Sudoku {
             }
         }
 
-        System.out.print(output.toString());
+        System.out.print(output);
     }
 
     public static boolean solve (char[][] puzzle){
         SudokuSolver solver = new SudokuSolver(puzzle);
 
-        //TODO
     }
 }

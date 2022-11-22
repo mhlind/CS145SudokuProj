@@ -12,7 +12,7 @@ import java.util.Random;
 
 public class SudokuP {
    
-	private static int[][] a = new int[9][9];
+	private static final int[][] a = new int[9][9];
 
 	public static char[][] puzzle() {
 		int counter=1,k1,k2;
@@ -22,7 +22,7 @@ public class SudokuP {
 		randomGen(0);
 
 		Random rand = new Random();
-		int n[]={0,3,6};
+		int[] n ={0,3,6};
 		for(int i=0;i<2;i++) {
 			k1=n[rand.nextInt(n.length)];
 			do{
