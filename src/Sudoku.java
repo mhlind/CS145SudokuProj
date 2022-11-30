@@ -1,15 +1,20 @@
 public class Sudoku {
-    public static boolean checkPuzzle(char[][] puzzle){
-        //TODO Implement check puzzle method, probably at the end
-        return false;
-    }
+
     public static void main(String[] args) {
-        //generates our puzzle
-        char[][] puzzle = SudokuP.puzzle();
-        printPuzzle(puzzle);
-
-
+            //generates our puzzle
+            char[][] puzzle = SudokuP.puzzle();
+            System.out.println("Unsolved Puzzle: ");
+            printPuzzle(puzzle);
+            if (solve(puzzle)) {
+                System.out.println("The Puzzle has been solved!");
+                printPuzzle(puzzle);
+            } else {
+                printPuzzle(puzzle);
+                System.out.println("The puzzle is unsolvable :(");
+            }
     }
+
+
 
     public static void printPuzzle(char[][] puzzle){
         //sb to allow modifying the output until it is fully created and ready to print
@@ -37,5 +42,6 @@ public class Sudoku {
     public static boolean solve (char[][] puzzle){
         SudokuSolver solver = new SudokuSolver(puzzle);
 
+        return solver.backtrack();
     }
 }
