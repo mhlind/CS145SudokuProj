@@ -41,7 +41,6 @@ public class Sudoku {
 
     public static boolean solve (char[][] puzzle){
         SudokuSolver solver = new SudokuSolver(puzzle);
-
         return solver.backtrack();
     }
 }

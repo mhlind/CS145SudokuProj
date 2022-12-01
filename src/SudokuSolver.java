@@ -12,18 +12,17 @@ public class SudokuSolver {
     // the values increase as you go down and to the right
     Point currentLocation = new Point();
 
-    //constructor to allow passing in the puzzle, so i don't have to do it for each method
+    //constructor to allow passing in the puzzle, so I don't have to do it for each method
     public SudokuSolver (char[][] puzzle){
         this.puzzle = puzzle;
         this.currentLocation.setLocation(0 , 0);
     }
 
-    //itertates through each value on the board, guessing values that have not been guessed yet
+    //iterates through each value on the board, guessing values that have not been guessed yet
     //and are also not already present on their row/column/box
     //if it runs out of values to guess in a certain square
     //it goes back to the square before, and guesses the next available value
     public boolean backtrack(){
-        ArrayList<UnsolvedPoints> unknownPoints = new ArrayList<>();
         ArrayList<Point> knownCoords = new ArrayList<>();
         //iterate through puzzle, logging all known numbers to the ArrayList
         //this will keep us from overriding these values
@@ -31,9 +30,6 @@ public class SudokuSolver {
             for (int j = 0; j < puzzle[i].length; j++){
                 if (puzzle[i][j] != '.'){
                     knownCoords.add(new Point(j , i));
-                }
-                else {
-                    unknownPoints.add(new UnsolvedPoints(new Point(j , i)));
                 }
             }
         }
@@ -79,19 +75,19 @@ public class SudokuSolver {
                 //otherwise, if we are out of guesses for this point
                 //go back to the last one and try a new guess
                 else {
+                    puzzle[currentLocation.y][currentLocation.x] = '.';
                     currentLocation = decrementLocation(currentLocation);
                     hasDecremented = true;
+
                 }
             }
             //these protect from infinite loop if we guess a wrong value next to a known value
             //it will just decrement again
             else if (!hasDecremented){
                 currentLocation = incrementLocation(currentLocation);
-                hasDecremented = false;
             }
             else {
                 currentLocation = decrementLocation(currentLocation);
-                hasDecremented = true;
             }
         }
 
@@ -132,11 +128,10 @@ public class SudokuSolver {
             }
         }
 
-        //reomves any values that already occur in the given column
+        //removes any values that already occur in the given column
         ArrayList<Integer> valuesInColumn = getValuesInColumn();
         for (int j = 0; j < valuesInColumn.size(); j++){
             //remove deletes the value at index
-            //TODO replace all occurences of remove with a method that deletes that value
             if (options.contains(valuesInColumn.get(j))){
                 int valueIndex = options.indexOf(valuesInColumn.get(j));
                 options.remove(valueIndex);
@@ -196,7 +191,7 @@ public class SudokuSolver {
                 currentval = Character.getNumericValue(chars[currentLocation.x]);
             }
 
-            //if currentval isnt already in valuesInColumn, add it
+            //if currentval isn't already in valuesInColumn, add it
             isNumInList = valuesInColumn.contains(currentval);
             if (!isNumInList && currentval != 0) {
                 valuesInColumn.add(currentval);
